@@ -1,5 +1,13 @@
 import React from 'react';
 
-const App = () => <div>Hello, this is app</div>;
+import { Header } from '~/components/header';
+import { Navigation } from '~/components/navigation';
+
+const App = () => (
+    <div>
+        <Header />
+        <Navigation />
+    </div>
+);
 
 export default App;
