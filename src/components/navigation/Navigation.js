@@ -1,13 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Navigation() {
     return (
         <nav>
             <ul>
                 <li>
-                    <a href="/exercises">
+                    <Link to="/">
+                        Forsiden
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/øvelser">
                         Øvelser
-                    </a>
+                    </Link>
                 </li>
             </ul>
         </nav>
