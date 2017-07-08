@@ -1,5 +1,6 @@
 export const ADD_EXERCISE = 'ADD_EXERCISE';
-export const addExercise = exercise => ({
+export const addExercise = (name, tenRm) => ({
     type: ADD_EXERCISE,
-    exercise,
+    name,
+    tenRm,
 });

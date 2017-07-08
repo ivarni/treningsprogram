@@ -3,11 +3,14 @@ import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 
 import rootReducer from '~/reducers';
+import { loadState, saveState } from './localStorage';
 
 const configureStore = () => {
+    const preloadedState = loadState();
+
     const store = createStore(
         rootReducer,
-        undefined,
+        preloadedState,
         compose(
             applyMiddleware(
                 thunk,
@@ -15,6 +18,10 @@ const configureStore = () => {
             ),
         ),
     );
+
+    store.subscribe(() => {
+        saveState(store.getState());
+    });
 
     if (module.hot) {
         module.hot.accept('../reducers', () => {

@@ -1,14 +1,15 @@
 import * as actions from '~/actions';
 
-export const defaultState = {};
+export const defaultState = [];
 
 export default (state = defaultState, action) => {
     switch (action.type) {
         case actions.ADD_EXERCISE: {
-            return { ...state };
+            const { name, tenRm } = action;
+            return [...state, { name, tenRm }];
         }
         default: {
-            return { ...state };
+            return state;
         }
     }
 };
