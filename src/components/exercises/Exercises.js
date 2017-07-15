@@ -1,4 +1,8 @@
 import React, { PureComponent } from 'react';
+import { func, number, shape } from 'prop-types';
+import { connect } from 'react-redux';
+
+import * as dispatchers from '~/dispatchers';
 
 import ExerciseList from './ExerciseList';
 
@@ -8,14 +12,10 @@ class Exercises extends PureComponent {
 
         this.onSubmit = this.onSubmit.bind(this);
         this.onSplitChange = this.onSplitChange.bind(this);
-
-        this.state = {
-            split: '1',
-        };
     }
 
     onSplitChange(event) {
-        this.setState({
+        this.props.setSplit({
             split: event.target.value,
         });
     }
@@ -25,7 +25,11 @@ class Exercises extends PureComponent {
     }
 
     render() {
-        const { split } = this.state;
+        const {
+            exercises,
+            split,
+        } = this.props;
+
         return (
             <div>
                 <h2>Velg øvelser</h2>
@@ -34,7 +38,7 @@ class Exercises extends PureComponent {
                     <fieldset>
                         <legend>Velg splitt</legend>
                         <input
-                            checked={split === '1'}
+                            checked={split === 1}
                             id="split1"
                             name="split"
                             onChange={this.onSplitChange}
@@ -45,7 +49,7 @@ class Exercises extends PureComponent {
                             1-splitt
                         </label>
                         <input
-                            checked={split === '2'}
+                            checked={split === 2}
                             id="split2"
                             name="split"
                             onChange={this.onSplitChange}
@@ -57,10 +61,34 @@ class Exercises extends PureComponent {
                         </label>
                     </fieldset>
                 </form>
-                <ExerciseList />
+                <div>
+                    {Array.from(Array(split), (_, i) => i + 1).map(day =>
+                        (<ExerciseList
+                            day={day}
+                            exercises={exercises[day] || []}
+                            key={day}
+                        />),
+                    )}
+                </div>
             </div>
         );
     }
 }
 
-export default Exercises;
+Exercises.propTypes = {
+    exercises: shape({}),
+    setSplit: func.isRequired,
+    split: number.isRequired,
+};
+
+const mapStateToProps = state => ({
+    exercises: state.exercises,
+    split: state.config.split,
+});
+
+export default connect(
+    mapStateToProps,
+    {
+        setSplit: dispatchers.setSplit,
+    },
+)(Exercises);

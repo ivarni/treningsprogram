@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { func } from 'prop-types';
+import { func, number } from 'prop-types';
 import { connect } from 'react-redux';
 
 import * as dispatchers from '~/dispatchers';
@@ -28,12 +28,18 @@ class AddExercise extends PureComponent {
     onSubmit(event) {
         event.preventDefault();
 
-        this.props.addExercise(this.state);
+        this.props.addExercise({
+            ...this.state,
+            day: this.props.day,
+        });
         this.props.onClose();
     }
 
     render() {
-        const { onClose } = this.props;
+        const {
+            onClose,
+        } = this.props;
+
         const {
             name,
             tenRm,
@@ -73,6 +79,7 @@ class AddExercise extends PureComponent {
 
 AddExercise.propTypes = {
     addExercise: func.isRequired,
+    day: number.isRequired,
     onClose: func.isRequired,
 };
 

@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import { arrayOf, number, shape, string } from 'prop-types';
-import { connect } from 'react-redux';
 
 import AddExercise from './AddExercise';
 
@@ -30,11 +29,14 @@ class ExerciseList extends PureComponent {
 
     render() {
         const { showAddExercise } = this.state;
-        const { exercises } = this.props;
+        const {
+            day,
+            exercises,
+        } = this.props;
 
         return (
             <div>
-                <h3>Øvelser i programmet</h3>
+                <h3>Øvelser i programmet, dag {day}</h3>
                 <ol>
                     {exercises.map(exercise => (
                         <li key={exercise.name}>
@@ -50,6 +52,7 @@ class ExerciseList extends PureComponent {
                 </button>
                 {showAddExercise &&
                     <AddExercise
+                        day={day}
                         onClose={this.onCloseAddExercise}
                     />
                 }
@@ -59,17 +62,11 @@ class ExerciseList extends PureComponent {
 }
 
 ExerciseList.propTypes = {
+    day: number.isRequired,
     exercises: arrayOf(shape({
         name: string.isRequired,
         tenRm: number.isRequired,
     })),
 };
 
-const mapStateToProps = state => ({
-    exercises: state.exercises,
-});
-
-export default connect(
-    mapStateToProps,
-    {},
-)(ExerciseList);
+export default ExerciseList;
