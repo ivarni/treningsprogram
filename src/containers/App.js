@@ -10,17 +10,19 @@ import { Program } from '~/components/program';
 import '~/styles/index.less';
 
 const App = () => (
-    <div>
-        <BrowserRouter>
-            <div>
+    <BrowserRouter>
+        <div className="body-text">
+            <header className="header">
                 <Header />
                 <Navigation />
+            </header>
+            <main className="main-container">
                 <Route path="/øvelser" component={Exercises} />
                 <Route path="/program" component={Program} />
                 <Route exact={true} path="/" component={About} />
-            </div>
-        </BrowserRouter>
-    </div>
+            </main>
+        </div>
+    </BrowserRouter>
 );
 
 export default App;

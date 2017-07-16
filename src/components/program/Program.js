@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Day from './Day';
 
 const Program = ({ program }) => (
-    <ol>
+    <ol className="program">
         {program.map((day, index) =>
             (<Day
                 day={index}

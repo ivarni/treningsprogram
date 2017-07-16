@@ -1,0 +1,43 @@
+.program {
+    list-style-type: none;
+    padding: 0;
+
+    &__day {
+        padding: 10px 0;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    &__exercises {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    &__exercise {
+        align-items: flex-end;
+        display: flex;
+        justify-content: flex-start;
+        padding: 15px 0;
+
+        > :first-child {
+            // background-color: red;
+            flex-basis: 180px;
+        }
+
+        > :nth-child(2) {
+            // background-color: blue;
+            flex-grow: 1;
+            max-width: 100px;
+            padding-right: 5px;
+            text-align: right;
+        }
+
+        > :nth-child(3) {
+            // background-color: yellow;
+        }
+
+        > :nth-child(4) {
+            min-width: 50px;
+        }
+    }
+}

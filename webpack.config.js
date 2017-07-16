@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const AutoDllPlugin = require('autodll-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -35,6 +36,9 @@ module.exports = {
             inject: true,
             template: './src/index.html',
         }),
+        new CopyWebpackPlugin([
+            { from: 'static/images', to: 'images' },
+        ]),
         new AutoDllPlugin({
             inject: true,
             context: __dirname,

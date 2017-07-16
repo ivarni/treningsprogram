@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/ivarni/treningsprogram#readme",
   "devDependencies": {
+    "copy-webpack-plugin": "^4.0.1",
     "cross-env": "^5.0.1",
     "css-loader": "^0.28.4",
     "eslint": "^4.1.1",

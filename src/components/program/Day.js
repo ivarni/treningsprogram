@@ -9,14 +9,24 @@ class Day extends PureComponent {
         } = this.props;
 
         return (
-            <li>
-                <h2>Dag {day + 1} - ({program[0].reps} reps)</h2>
-                <ul>
+            <li className="program__day">
+                <h2>Dag {day + 1}, {program[0].reps} reps</h2>
+                <ul className="program__exercises">
                     {program.map(exercise =>
                         (<li
+                            className="program__exercise"
                             key={exercise.name}
                         >
-                            {exercise.name} - {exercise.kgs} kg
+                            <div>{exercise.name}</div>
+                            <div>{exercise.kgs}</div>
+                            <div>kg</div>
+                            <button
+                                aria-label="merk som utført"
+                                className="button__icon button__icon--clear"
+                                type="button"
+                            >
+                                &nbsp;
+                            </button>
                         </li>),
                     )}
                 </ul>

@@ -3,20 +3,15 @@ import { Link } from 'react-router-dom';
 
 export default function Navigation() {
     return (
-        <nav>
-            <ul>
+        <nav className="navigation">
+            <ul className="navigation__bar">
                 <li>
-                    <Link to="/">
-                        Forsiden
-                    </Link>
-                </li>
-                <li>
-                    <Link to="/øvelser">
+                    <Link className="navigation__link" to="/øvelser">
                         Øvelser
                     </Link>
                 </li>
                 <li>
-                    <Link to="/program">
+                    <Link className="navigation__link" to="/program">
                         Program
                     </Link>
                 </li>
