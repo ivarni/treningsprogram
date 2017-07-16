@@ -15,6 +15,11 @@ export default function Navigation() {
                         Øvelser
                     </Link>
                 </li>
+                <li>
+                    <Link to="/program">
+                        Program
+                    </Link>
+                </li>
             </ul>
         </nav>
     );

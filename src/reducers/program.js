@@ -3,13 +3,18 @@ import formula from '~/utils/formula';
 
 const defaultState = [];
 
-// { config, exercises }
-const calculateProgram = (state, { exercises }) => formula.map(f => exercises[1].map(exercise => ({
-    ...exercise,
-    kgs: exercise.tenRm * f.multiplier,
-    reps: f.reps,
-    dropset: f.dropset,
-})));
+const calculateProgram = (state, { config: { split }, exercises }) => formula
+    .map(f =>
+        Array.from(Array(split), (_, i) => exercises[i + 1])
+            .map(day => day.map(exercise => ({
+                ...exercise,
+                kgs: exercise.tenRm * f.multiplier,
+                reps: f.reps,
+                dropset: f.dropset,
+            })),
+            ),
+    )
+    .reduce((x, y) => x.concat(y), []);
 
 export default (state = defaultState, action) => {
     switch (action.type) {
