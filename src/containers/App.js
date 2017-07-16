@@ -7,6 +7,8 @@ import { Header } from '~/components/header';
 import { Navigation } from '~/components/navigation';
 import { Program } from '~/components/program';
 
+import '~/styles/index.less';
+
 const App = () => (
     <div>
         <BrowserRouter>
