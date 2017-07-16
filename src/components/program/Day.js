@@ -10,13 +10,13 @@ class Day extends PureComponent {
 
         return (
             <li>
-                <h2>Dag {day + 1} - 3 sett</h2>
+                <h2>Dag {day + 1} - ({program[0].reps} reps)</h2>
                 <ul>
                     {program.map(exercise =>
                         (<li
                             key={exercise.name}
                         >
-                            {exercise.name} - {exercise.kgs}kg ({exercise.reps} reps)
+                            {exercise.name} - {exercise.kgs} kg
                         </li>),
                     )}
                 </ul>

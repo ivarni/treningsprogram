@@ -8,7 +8,7 @@ const calculateProgram = (state, { config: { split }, exercises }) => formula
         Array.from(Array(split), (_, i) => exercises[i + 1])
             .map(day => day.map(exercise => ({
                 ...exercise,
-                kgs: exercise.tenRm * f.multiplier,
+                kgs: Number((exercise.tenRm * f.multiplier).toFixed(1)),
                 reps: f.reps,
                 dropset: f.dropset,
             })),

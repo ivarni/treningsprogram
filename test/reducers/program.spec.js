@@ -44,7 +44,7 @@ describe('program reducer', () => {
                 const squats = day.find(d => d.name === 'Knebøy');
                 const { dropset, multiplier, reps } = formula[index];
 
-                expect(squats.kgs).to.be(squats.tenRm * multiplier);
+                expect(squats.kgs).to.be(Number((squats.tenRm * multiplier).toFixed(1)));
                 expect(squats.reps).to.be(reps);
                 expect(squats.dropset).to.be(dropset);
             });
@@ -92,7 +92,7 @@ describe('program reducer', () => {
 
                 const { dropset, multiplier, reps } = formula[index];
 
-                expect((squats || curls).kgs).to.be((squats || curls).tenRm * multiplier);
+                expect((squats || curls).kgs).to.be(Number(((squats || curls).tenRm * multiplier).toFixed(1)));
                 expect((squats || curls).reps).to.be(reps);
                 expect((squats || curls).dropset).to.be(dropset);
 

@@ -17,7 +17,7 @@ const Program = ({ program }) => (
 );
 
 Program.propTypes = {
-    program: arrayOf(shape({})).isRequired,
+    program: arrayOf(arrayOf(shape({}))).isRequired,
 };
 
 const mapStateToProps = state => ({
