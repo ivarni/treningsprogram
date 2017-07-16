@@ -4,6 +4,17 @@ const AutoDllPlugin = require('autodll-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const cleanArray = (arr) => arr.reduce(
+    (res, el) => {
+        if (el !== null && el !== undefined) {
+            res.push(el)
+        }
+        return res;
+    }, []
+);
+
+const isProd = (yes, no) => process.env.NODE_ENV === 'production' ? yes : no;
+
 module.exports = {
     entry: './src/index.js',
 
@@ -12,6 +23,8 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/'
     },
+
+    devtool: isProd('hidden-source-map', 'cheap-module-eval-source-map'),
 
     module: {
         rules: [
@@ -57,7 +70,15 @@ module.exports = {
                     'redux',
                     'redux-thunk',
                 ]
-            }
+            },
+            plugins: cleanArray([
+                new webpack.DefinePlugin({
+                    'process.env' : {
+                        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development')
+                    }
+                }),
+                isProd(new webpack.optimize.UglifyJsPlugin()),
+            ])
         })
     ]
 };
