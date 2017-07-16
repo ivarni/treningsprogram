@@ -48,7 +48,9 @@ module.exports = {
                 vendor: [
                     'prop-types',
                     'react',
+                    'react-collapse',
                     'react-dom',
+                    'react-motion',
                     'react-redux',
                     'react-router',
                     'react-router-dom',

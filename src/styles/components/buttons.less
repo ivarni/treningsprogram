@@ -14,5 +14,24 @@
         &--clear {
             background-image: url(/images/ic_clear_black_24px.svg);
         }
+
+        &--expand {
+            background-image: url(/images/ic_keyboard_arrow_down_black_24px.svg);
+            // Use margin to leave room for rotating without expanding the
+            // focus box
+            margin-right: 10px;
+            transition: transform 0.2s cubic-bezier(0.29, -0.15, 0.65, 1.19);
+
+            &--open {
+                transform: rotate(180deg);
+            }
+        }
+    }
+}
+
+[role="button"] {
+    &:focus {
+        background-color: #eeeeee;
+        outline-style: none;
     }
 }
