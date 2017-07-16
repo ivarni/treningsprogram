@@ -4,25 +4,17 @@ import { arrayOf, number, shape, string } from 'prop-types';
 import { Collapse } from 'react-collapse';
 import classNames from 'classnames';
 
+import Exercise from './Exercise';
+
 class Day extends PureComponent {
     constructor() {
         super();
 
-        this.markAsDone = this.markAsDone.bind(this);
         this.toggleOpen = this.toggleOpen.bind(this);
 
         this.state = {
             isOpened: false,
         };
-    }
-
-    markAsDone(event) {
-        if (event.key && event.key !== 'Enter') {
-            return;
-        }
-        this.setState({
-            todo: true,
-        });
     }
 
     toggleOpen(event) {
@@ -72,23 +64,11 @@ class Day extends PureComponent {
                             (<li
                                 key={exercise.name}
                             >
-                                <div
-                                    aria-label="merk som utført"
-                                    className="program__exercise"
-                                    onClick={this.markAsDone}
-                                    onKeyPress={this.markAsDone}
-                                    role="button"
-                                    tabIndex={isOpened ? 0 : -1}
-                                >
-                                    <div>{exercise.name}</div>
-                                    <div>{exercise.kgs}</div>
-                                    <div>kg</div>
-                                    <div
-                                        className="button__icon button__icon--clear"
-                                    >
-                                        &nbsp;
-                                    </div>
-                                </div>
+                                <Exercise
+                                    exercise={exercise}
+                                    day={day + 1}
+                                    isOpened={isOpened}
+                                />
                             </li>),
                         )}
                     </ul>

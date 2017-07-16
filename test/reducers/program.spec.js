@@ -102,4 +102,24 @@ describe('program reducer', () => {
             });
         });
     });
+
+    describe('marking an exercise as done', () => {
+        const startState = [
+            [
+                { name: 'Knebøy', kgs: 56, reps: 12 },
+                { name: 'Markløft', kgs: 56, reps: 12 },
+            ],
+            [
+                { name: 'Knebøy', kgs: 60, reps: 12 },
+                { name: 'Markløft', kgs: 60, reps: 12 },
+            ],
+        ];
+
+        it('marks the correct exercise as being done', () => {
+            const action = actions.markExerciseDone(2, 'Knebøy');
+            state = getState(action, startState);
+
+            expect(state[1][0].done).to.be(true);
+        });
+    });
 });
