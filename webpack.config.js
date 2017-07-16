@@ -4,16 +4,16 @@ const AutoDllPlugin = require('autodll-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const cleanArray = (arr) => arr.reduce(
+const cleanArray = arr => arr.reduce(
     (res, el) => {
         if (el !== null && el !== undefined) {
-            res.push(el)
+            res.push(el);
         }
         return res;
-    }, []
+    }, [],
 );
 
-const isProd = (yes, no) => process.env.NODE_ENV === 'production' ? yes : no;
+const isProd = (yes, no) => (process.env.NODE_ENV === 'production' ? yes : no);
 
 module.exports = {
     entry: './src/index.js',
@@ -21,7 +21,7 @@ module.exports = {
     output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist'),
-        publicPath: '/'
+        publicPath: '/',
     },
 
     devtool: isProd('hidden-source-map', 'cheap-module-eval-source-map'),
@@ -31,17 +31,17 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: "babel-loader"
+                loader: 'babel-loader',
             },
             {
                 test: /\.less$/,
                 use: [
-                    { loader: "style-loader" },
-                    { loader: "css-loader" },
-                    { loader: "less-loader" },
-                ]
-            }
-        ]
+                    { loader: 'style-loader' },
+                    { loader: 'css-loader' },
+                    { loader: 'less-loader' },
+                ],
+            },
+        ],
     },
 
     plugins: [
@@ -50,7 +50,7 @@ module.exports = {
             template: './src/index.html',
         }),
         new CopyWebpackPlugin([
-            { from: 'static/images', to: 'images' },
+            { from: 'static/images', to: 'images' },
         ]),
         new AutoDllPlugin({
             inject: true,
@@ -69,16 +69,16 @@ module.exports = {
                     'react-router-dom',
                     'redux',
                     'redux-thunk',
-                ]
+                ],
             },
             plugins: cleanArray([
                 new webpack.DefinePlugin({
-                    'process.env' : {
-                        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development')
-                    }
+                    'process.env': {
+                        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+                    },
                 }),
                 isProd(new webpack.optimize.UglifyJsPlugin()),
-            ])
-        })
-    ]
+            ]),
+        }),
+    ],
 };
