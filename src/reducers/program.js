@@ -11,9 +11,7 @@ const calculateProgram = (state, { config: { split }, exercises }) => formula
                 kgs: Number((exercise.tenRm * f.multiplier).toFixed(1)),
                 reps: f.reps,
                 dropset: f.dropset,
-            })),
-            ),
-    )
+            }))))
     .reduce((x, y) => x.concat(y), []);
 
 export default (state = defaultState, action) => {
