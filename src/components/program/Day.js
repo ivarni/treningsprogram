@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import { arrayOf, number, shape, string } from 'prop-types';
-
 import { Collapse } from 'react-collapse';
 import classNames from 'classnames';
 
@@ -34,8 +33,17 @@ class Day extends PureComponent {
 
         const { isOpened } = this.state;
 
+        const isDone = program.every(exercise => exercise.done);
+
         return (
-            <li className="program__day">
+            <li
+                className={
+                    classNames(
+                        'program__day',
+                        { 'program__day--done': isDone },
+                    )
+                }
+            >
                 <div
                     className="program__title"
                     onClick={this.toggleOpen}
@@ -54,9 +62,7 @@ class Day extends PureComponent {
                                 { 'button__icon--expand--open': isOpened },
                             )
                         }
-                    >
-                        &nbsp;
-                    </div>
+                    />
                 </div>
                 <Collapse isOpened={isOpened}>
                     <ul className="program__exercises">

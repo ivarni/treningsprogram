@@ -14,10 +14,25 @@ const calculateProgram = (state, { config: { split }, exercises }) => formula
             }))))
     .reduce((x, y) => x.concat(y), []);
 
+const markExerciseDone = (state, { day: number, name }) => state
+    .map((day, index) =>
+        day.map((exercise) => {
+            if (index + 1 === number && name === exercise.name) {
+                return {
+                    ...exercise,
+                    done: !exercise.done,
+                };
+            }
+            return exercise;
+        }),
+    );
+
 export default (state = defaultState, action) => {
     switch (action.type) {
         case actions.CALCULATE_PROGRAM:
             return calculateProgram(state, action);
+        case actions.MARK_EXERCISE_DONE:
+            return markExerciseDone(state, action);
         default:
             return state;
     }

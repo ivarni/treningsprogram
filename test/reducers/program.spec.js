@@ -119,7 +119,21 @@ describe('program reducer', () => {
             const action = actions.markExerciseDone(2, 'Knebøy');
             state = getState(action, startState);
 
+            expect(state[0][0].done).not.to.be(true);
+            expect(state[0][1].done).not.to.be(true);
             expect(state[1][0].done).to.be(true);
+            expect(state[1][1].done).not.to.be(true);
+        });
+
+        it('removes the done mark if exercise is already done', () => {
+            const action = actions.markExerciseDone(2, 'Knebøy');
+            const markedState = getState(action, startState);
+            state = getState(action, markedState);
+
+            expect(state[0][0].done).not.to.be(true);
+            expect(state[0][1].done).not.to.be(true);
+            expect(state[1][0].done).not.to.be(true);
+            expect(state[1][1].done).not.to.be(true);
         });
     });
 });
