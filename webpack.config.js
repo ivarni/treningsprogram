@@ -1,8 +1,10 @@
-const webpack = require('webpack');
 const path = require('path');
+
+const webpack = require('webpack');
 const AutoDllPlugin = require('autodll-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const OfflinePlugin = require('offline-plugin');
 
 const cleanArray = arr => arr.reduce(
     (res, el) => {
@@ -19,7 +21,7 @@ module.exports = {
     entry: './src/index.js',
 
     output: {
-        filename: '[name].bundle.js',
+        filename: '[name]_[hash].js',
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/',
     },
@@ -44,7 +46,7 @@ module.exports = {
         ],
     },
 
-    plugins: [
+    plugins: cleanArray([
         new HtmlWebpackPlugin({
             inject: true,
             template: './src/index.html',
@@ -80,5 +82,30 @@ module.exports = {
                 isProd(new webpack.optimize.UglifyJsPlugin()),
             ]),
         }),
-    ],
+        isProd(new OfflinePlugin({
+            autoUpdate: true,
+            publicPath: '/',
+            safeToUseOptionalCaches: true,
+            caches: {
+                main: [
+                    'main*.js',
+                    'vendor*.js'
+                ],
+                additional: [
+                    ':externals:',
+                ],
+                optional: [
+                    ':rest:'
+                ],
+            },
+            externals: [
+                '/',
+                'øvelser',
+                'program',
+            ],
+            ServiceWorker: {
+                navigateFallbackURL: '/',
+            },
+        }))
+    ]),
 };

@@ -1,8 +1,12 @@
 import React from 'react';
 import { render } from 'react-dom';
 
+import * as OfflinePluginRuntime from 'offline-plugin/runtime';
+
 import Root from '~/containers/Root';
 import configureStore from '~/store/configureStore';
+
+OfflinePluginRuntime.install();
 
 const store = configureStore();
 
