@@ -10,7 +10,7 @@ const cleanArray = arr => arr.reduce(
             res.push(el);
         }
         return res;
-    }, [],
+    }, []
 );
 
 const isProd = (yes, no) => (process.env.NODE_ENV === 'production' ? yes : no);
