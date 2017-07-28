@@ -51,7 +51,7 @@ class Exercise extends PureComponent {
                 <div>{exercise.name}</div>
                 <div>{exercise.kgs}</div>
                 <div>kg</div>
-                <div className="button__icon button__icon--clear" />
+                <div className="button button__icon button__icon--clear" />
             </div>
         );
     }

@@ -13,6 +13,13 @@
         text-decoration: none;
         width: 25px;
 
+        &--add {
+            background-image: url(/images/ic_add_circle_black_24px.svg);
+            background-size: 40px;
+            height: 40px;
+            width: 50px;
+        }
+
         &--clear {
             background-image: url(/images/ic_clear_black_24px.svg);
         }
@@ -27,6 +34,17 @@
             &--open {
                 transform: rotate(180deg);
             }
+        }
+    }
+
+    &__text {
+        border: 2px solid @text-on-white;
+        border-radius: 5px;
+        margin-left: 10px;
+        padding: 5px;
+
+        &:first-child {
+            margin-left: 0;
         }
     }
 }

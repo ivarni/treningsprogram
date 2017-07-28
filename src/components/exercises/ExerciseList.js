@@ -35,21 +35,41 @@ class ExerciseList extends PureComponent {
         } = this.props;
 
         return (
-            <div>
-                <h3>Øvelser i programmet, dag {day}</h3>
-                <ol>
-                    {exercises.map(exercise => (
-                        <li key={exercise.name}>
-                            {exercise.name}, 10RM: {exercise.tenRm}
-                        </li>
-                    ))}
-                </ol>
-                <button
-                    type="button"
-                    onClick={this.onShowAddExercise}
-                >
-                    Legg til øvelse
-                </button>
+            <div className="exercises__section">
+                <h3 className="exercises__section-header">
+                    Dag {day}
+                </h3>
+                <table className="exercises__list">
+                    <thead>
+                        <tr>
+                            <th>Øvelse</th>
+                            <th>10 RM</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {exercises.map(exercise => (
+                            <tr
+                                key={exercise.name}
+                            >
+                                <td>
+                                    {exercise.name}
+                                </td>
+                                <td>
+                                    {exercise.tenRm} kg
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                {!showAddExercise &&
+                    <button
+                        className="button button__icon button__icon--add"
+                        type="button"
+                        onClick={this.onShowAddExercise}
+                    >
+                        Legg til øvelse
+                    </button>
+                }
                 {showAddExercise &&
                     <AddExercise
                         day={day}

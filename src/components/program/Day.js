@@ -57,6 +57,7 @@ class Day extends PureComponent {
                     <div
                         className={
                             classNames(
+                                'button',
                                 'button__icon',
                                 'button__icon--expand',
                                 { 'button__icon--expand--open': isOpened },

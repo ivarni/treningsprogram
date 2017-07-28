@@ -1,4 +1,4 @@
-@import (inline)'normalize.css';
+@import (inline) 'normalize.css';
 
 @import 'colors';
 @import 'components/typography';
@@ -7,6 +7,8 @@
 @import 'components/header';
 @import 'components/navigation';
 @import 'components/program';
+@import 'components/exercises';
+@import 'components/form';
 
 html {
     box-sizing: border-box;
@@ -17,4 +19,9 @@ html {
 
 .main-container {
     padding: 0 10px;
+}
+
+*:focus {
+    outline-style: solid;
+    outline-width: 3px;
 }
