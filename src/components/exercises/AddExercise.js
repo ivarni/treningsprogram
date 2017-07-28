@@ -1,20 +1,26 @@
 import React, { PureComponent } from 'react';
-import { func, number } from 'prop-types';
-import { connect } from 'react-redux';
-
-import * as dispatchers from '~/dispatchers';
+import { func, number, string } from 'prop-types';
 
 class AddExercise extends PureComponent {
-    constructor() {
+    constructor(props) {
         super();
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            name: '',
-            tenRm: '',
+            name: props.name || '',
+            tenRm: props.tenRm || '',
         };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.name !== nextProps.name && this.props.tenRm !== nextProps.tenRm) {
+            this.setState({
+                name: nextProps.name,
+                tenRm: nextProps.tenRm,
+            });
+        }
     }
 
     onChange(event) {
@@ -28,7 +34,7 @@ class AddExercise extends PureComponent {
     onSubmit(event) {
         event.preventDefault();
 
-        this.props.addExercise({
+        this.props.onAddExercise({
             ...this.state,
             day: this.props.day,
         });
@@ -100,11 +106,11 @@ class AddExercise extends PureComponent {
 }
 
 AddExercise.propTypes = {
-    addExercise: func.isRequired,
     day: number.isRequired,
+    name: string,
+    onAddExercise: func.isRequired,
     onClose: func.isRequired,
+    tenRm: number,
 };
 
-export default connect(null, {
-    addExercise: dispatchers.addExercise,
-})(AddExercise);
+export default AddExercise;

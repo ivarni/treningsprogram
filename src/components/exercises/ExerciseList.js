@@ -10,33 +10,58 @@ class ExerciseList extends PureComponent {
     constructor() {
         super();
 
+        this.editExercise = this.editExercise.bind(this);
+        this.onAddExercise = this.onAddExercise.bind(this);
         this.onCloseAddExercise = this.onCloseAddExercise.bind(this);
         this.onShowAddExercise = this.onShowAddExercise.bind(this);
         this.removeExercise = this.removeExercise.bind(this);
 
         this.state = {
-            showAddExercise: false,
+            editing: {},
+            showExerciseForm: false,
         };
+    }
+
+    onAddExercise(data) {
+        this.props.addExercise(data);
+        this.setState({
+            editing: {},
+        });
     }
 
     onCloseAddExercise() {
         this.setState({
-            showAddExercise: false,
+            showExerciseForm: false,
         });
     }
 
     onShowAddExercise() {
         this.setState({
-            showAddExercise: true,
+            showExerciseForm: true,
+        });
+    }
+
+    editExercise({ name, tenRm }) {
+        this.setState({
+            editing: { name, tenRm },
+            showExerciseForm: true,
         });
     }
 
     removeExercise(day, name) {
         this.props.removeExercise({ day, name });
+
+        this.setState({
+            showExerciseForm: false,
+        });
     }
 
     render() {
-        const { showAddExercise } = this.state;
+        const {
+            editing,
+            showExerciseForm,
+        } = this.state;
+
         const {
             day,
             exercises,
@@ -53,9 +78,16 @@ class ExerciseList extends PureComponent {
                             <th>Øvelse</th>
                             <th>10 RM</th>
                             <th />
+                            <th />
                         </tr>
                     </thead>
                     <tbody>
+                        {
+                        /*
+                                TODO: Turn these into a component so we dont
+                                have to recreate callbacks on each render
+                            */
+                        }
                         {exercises.map(exercise => (
                             <tr
                                 key={exercise.name}
@@ -75,11 +107,20 @@ class ExerciseList extends PureComponent {
                                         Fjern øvelse
                                     </button>
                                 </td>
+                                <td>
+                                    <button
+                                        className="button button__icon button__icon--edit"
+                                        onClick={() => this.editExercise(exercise)}
+                                        type="button"
+                                    >
+                                        Endre øvelse
+                                    </button>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
-                {!showAddExercise &&
+                {!showExerciseForm &&
                     <button
                         className="button button__icon button__icon--add"
                         type="button"
@@ -88,10 +129,13 @@ class ExerciseList extends PureComponent {
                         Legg til øvelse
                     </button>
                 }
-                {showAddExercise &&
+                {showExerciseForm &&
                     <AddExercise
+                        onAddExercise={this.onAddExercise}
                         day={day}
+                        name={editing.name}
                         onClose={this.onCloseAddExercise}
+                        tenRm={editing.tenRm}
                     />
                 }
             </div>
@@ -100,6 +144,7 @@ class ExerciseList extends PureComponent {
 }
 
 ExerciseList.propTypes = {
+    addExercise: func.isRequired,
     day: number.isRequired,
     exercises: arrayOf(shape({
         name: string.isRequired,
@@ -109,5 +154,6 @@ ExerciseList.propTypes = {
 };
 
 export default connect(null, {
+    addExercise: dispatchers.addExercise,
     removeExercise: dispatchers.removeExercise,
 })(ExerciseList);
