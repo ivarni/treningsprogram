@@ -5,3 +5,10 @@ export const addExercise = (day, name, tenRm) => ({
     name,
     tenRm,
 });
+
+export const REMOVE_EXERCISE = 'REMOVE_EXERCISE';
+export const removeExercise = (day, name) => ({
+    type: REMOVE_EXERCISE,
+    day,
+    name,
+});

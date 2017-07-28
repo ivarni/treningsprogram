@@ -1,5 +1,8 @@
 import React, { PureComponent } from 'react';
-import { arrayOf, number, shape, string } from 'prop-types';
+import { arrayOf, func, number, shape, string } from 'prop-types';
+import { connect } from 'react-redux';
+
+import * as dispatchers from '~/dispatchers';
 
 import AddExercise from './AddExercise';
 
@@ -9,6 +12,7 @@ class ExerciseList extends PureComponent {
 
         this.onCloseAddExercise = this.onCloseAddExercise.bind(this);
         this.onShowAddExercise = this.onShowAddExercise.bind(this);
+        this.removeExercise = this.removeExercise.bind(this);
 
         this.state = {
             showAddExercise: false,
@@ -25,6 +29,10 @@ class ExerciseList extends PureComponent {
         this.setState({
             showAddExercise: true,
         });
+    }
+
+    removeExercise(day, name) {
+        this.props.removeExercise({ day, name });
     }
 
     render() {
@@ -44,6 +52,7 @@ class ExerciseList extends PureComponent {
                         <tr>
                             <th>Øvelse</th>
                             <th>10 RM</th>
+                            <th />
                         </tr>
                     </thead>
                     <tbody>
@@ -56,6 +65,15 @@ class ExerciseList extends PureComponent {
                                 </td>
                                 <td>
                                     {exercise.tenRm} kg
+                                </td>
+                                <td>
+                                    <button
+                                        className="button button__icon button__icon--clear"
+                                        onClick={() => this.removeExercise(day, exercise.name)}
+                                        type="button"
+                                    >
+                                        Fjern øvelse
+                                    </button>
                                 </td>
                             </tr>
                         ))}
@@ -87,6 +105,9 @@ ExerciseList.propTypes = {
         name: string.isRequired,
         tenRm: number.isRequired,
     })),
+    removeExercise: func.isRequired,
 };
 
-export default ExerciseList;
+export default connect(null, {
+    removeExercise: dispatchers.removeExercise,
+})(ExerciseList);
