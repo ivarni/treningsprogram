@@ -53,6 +53,7 @@ module.exports = {
         }),
         new CopyWebpackPlugin([
             { from: 'static/images', to: 'images' },
+            { from: 'static/fonts', to: 'fonts' },
         ]),
         new AutoDllPlugin({
             inject: true,
@@ -89,14 +90,12 @@ module.exports = {
             caches: {
                 main: [
                     'main*.js',
-                    'vendor*.js'
+                    'dll/vendor*.js'
                 ],
                 additional: [
                     ':externals:',
-                ],
-                optional: [
-                    ':rest:'
-                ],
+                    ':rest:',
+                ]
             },
             externals: [
                 '/',
