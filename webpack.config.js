@@ -52,6 +52,7 @@ module.exports = {
             template: './src/index.html',
         }),
         new CopyWebpackPlugin([
+            { from: 'static/favicon.ico' },
             { from: 'static/images', to: 'images' },
             { from: 'static/fonts', to: 'fonts' },
         ]),
