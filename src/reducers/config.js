@@ -1,7 +1,7 @@
 import * as actions from '~/actions';
 
 export const defaultState = {
-    split: 1,
+    split: 2,
 };
 
 export default (state = defaultState, action) => {
