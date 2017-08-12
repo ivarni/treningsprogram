@@ -40,7 +40,6 @@ const markExerciseDone = (state, { day: number, name }) => state
 export default (state = defaultState, action) => {
     switch (action.type) {
         case actions.CALCULATE_PROGRAM:
-            // console.log(state)
             return calculateProgram(state, action);
         case actions.MARK_EXERCISE_DONE:
             return markExerciseDone(state, action);
