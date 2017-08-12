@@ -3,6 +3,7 @@ import formula from '~/utils/formula';
 
 const defaultState = [];
 
+// TODO fix this bloody mess when sober
 const calculateProgram = (state, { config: { split }, exercises }) => formula
     .map(f =>
         Array.from(Array(split), (_, i) => exercises[i + 1])
@@ -12,7 +13,16 @@ const calculateProgram = (state, { config: { split }, exercises }) => formula
                 reps: f.reps,
                 dropset: f.dropset,
             }))))
-    .reduce((x, y) => x.concat(y), []);
+    .reduce((x, y) => x.concat(y), [])
+    .map((day, index) => day.map((d, e) => {
+        if (state[index]) {
+            return {
+                ...state[index][e],
+                ...d,
+            };
+        }
+        return d;
+    }));
 
 const markExerciseDone = (state, { day: number, name }) => state
     .map((day, index) =>
@@ -30,6 +40,7 @@ const markExerciseDone = (state, { day: number, name }) => state
 export default (state = defaultState, action) => {
     switch (action.type) {
         case actions.CALCULATE_PROGRAM:
+            // console.log(state)
             return calculateProgram(state, action);
         case actions.MARK_EXERCISE_DONE:
             return markExerciseDone(state, action);

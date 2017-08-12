@@ -101,6 +101,14 @@ describe('program reducer', () => {
                 }
             });
         });
+
+        it('keeps the done mark if there is already a program', () => {
+            const action = actions.markExerciseDone(35, 'Knebøy');
+            state = getState(action, state);
+            state = getState(actions.calculateProgram(config, exercises), state);
+
+            expect(state[34][0].done).to.be(true);
+        });
     });
 
     describe('marking an exercise as done', () => {
