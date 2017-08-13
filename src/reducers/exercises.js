@@ -2,11 +2,11 @@ import * as actions from '~/actions';
 
 export const defaultState = {
     1: [
-        { name: 'Knebøy', tenRm: 0 },
-        { name: 'Bicepscurl', tenRm: 0 },
-        { name: 'Tricepspress', tenRm: 0 },
-        { name: 'Markløft', tenRm: 0 },
-        { name: 'Legcurl', tenRm: 0 },
+        { name: 'Knebøy', tenRm: 55 },
+        { name: 'Bicepscurl', tenRm: 12.5 },
+        { name: 'Tricepspress', tenRm: 6 },
+        { name: 'Legcurl', tenRm: 40 },
+        { name: 'Tåhev', tenRm: 0 },
     ],
     2: [
         { name: 'Nedtrekk', tenRm: 0 },
