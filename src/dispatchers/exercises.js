@@ -13,3 +13,10 @@ export const removeExercise = ({ day, name }) =>
         const { config, exercises } = getState();
         dispatch(actions.calculateProgram(config, exercises));
     };
+
+export const editExercise = ({ day, name, tenRm }) =>
+    (dispatch, getState) => {
+        dispatch(actions.editExercise(day, name, Number(tenRm)));
+        const { config, exercises } = getState();
+        dispatch(actions.calculateProgram(config, exercises));
+    };

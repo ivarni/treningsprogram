@@ -144,27 +144,4 @@ describe('program reducer', () => {
             expect(state[1][1].done).not.to.be(true);
         });
     });
-
-    /* eslint-disable */
-    describe('editing an exercise', () => {
-        const startState = [
-            [
-                { name: 'Knebøy', kgs: 56, reps: 12 },
-                { name: 'Markløft', kgs: 56, reps: 12 },
-            ],
-            [
-                { name: 'Knebøy', kgs: 60, reps: 12 },
-                { name: 'Markløft', kgs: 60, reps: 12 },
-            ],
-        ];
-
-        it('updates the name and the kgs', () => {
-
-        });
-
-        it('does not reorder the exercises', () => {
-
-        });
-    });
-    /* eslint-enable */
 });

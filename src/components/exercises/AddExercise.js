@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { func, number, string } from 'prop-types';
+import { bool, func, number, string } from 'prop-types';
 
 class AddExercise extends PureComponent {
     constructor(props) {
@@ -34,15 +34,30 @@ class AddExercise extends PureComponent {
     onSubmit(event) {
         event.preventDefault();
 
-        this.props.onAddExercise({
+        const {
+            day,
+            isEditing,
+            onAddExercise,
+            onEditExercise,
+        } = this.props;
+
+        const data = {
             ...this.state,
-            day: this.props.day,
-        });
+            day,
+        };
+
+        if (isEditing) {
+            onEditExercise(data);
+        } else {
+            onAddExercise(data);
+        }
+
         this.props.onClose();
     }
 
     render() {
         const {
+            isEditing,
             onClose,
         } = this.props;
 
@@ -65,6 +80,7 @@ class AddExercise extends PureComponent {
                     </label>
                     <input
                         className="form__text-input"
+                        disabled={isEditing}
                         id="name"
                         name="name"
                         onChange={this.onChange}
@@ -106,10 +122,12 @@ class AddExercise extends PureComponent {
 }
 
 AddExercise.propTypes = {
+    isEditing: bool.isRequired,
     day: number.isRequired,
     name: string,
     onAddExercise: func.isRequired,
     onClose: func.isRequired,
+    onEditExercise: func.isRequired,
     tenRm: number,
 };
 

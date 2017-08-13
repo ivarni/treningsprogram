@@ -30,12 +30,24 @@ const removeExercise = (state, { day, name }) => ({
     [day]: state[day].filter(exercise => exercise.name !== name),
 });
 
+const editExercise = (state, { day, name, tenRm }) => ({
+    ...state,
+    [day]: state[day].map((exercise) => {
+        if (exercise.name === name) {
+            return { name, tenRm };
+        }
+        return exercise;
+    }),
+});
+
 export default (state = defaultState, action) => {
     switch (action.type) {
         case actions.ADD_EXERCISE:
             return addExercise(state, action);
         case actions.REMOVE_EXERCISE:
             return removeExercise(state, action);
+        case actions.EDIT_EXERCISE:
+            return editExercise(state, action);
         default:
             return state;
     }

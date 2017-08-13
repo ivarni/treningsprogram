@@ -12,3 +12,11 @@ export const removeExercise = (day, name) => ({
     day,
     name,
 });
+
+export const EDIT_EXERCISE = 'EDIT_EXERCISE';
+export const editExercise = (day, name, tenRm) => ({
+    type: EDIT_EXERCISE,
+    day,
+    name,
+    tenRm,
+});

@@ -13,6 +13,7 @@ class ExerciseList extends PureComponent {
         this.editExercise = this.editExercise.bind(this);
         this.onAddExercise = this.onAddExercise.bind(this);
         this.onCloseAddExercise = this.onCloseAddExercise.bind(this);
+        this.onEditExercise = this.onEditExercise.bind(this);
         this.onShowAddExercise = this.onShowAddExercise.bind(this);
         this.removeExercise = this.removeExercise.bind(this);
 
@@ -32,6 +33,13 @@ class ExerciseList extends PureComponent {
     onCloseAddExercise() {
         this.setState({
             showExerciseForm: false,
+        });
+    }
+
+    onEditExercise(data) {
+        this.props.editExercise(data);
+        this.setState({
+            editing: {},
         });
     }
 
@@ -131,9 +139,11 @@ class ExerciseList extends PureComponent {
                 }
                 {showExerciseForm &&
                     <AddExercise
-                        onAddExercise={this.onAddExercise}
                         day={day}
+                        isEditing={!!editing}
                         name={editing.name}
+                        onAddExercise={this.onAddExercise}
+                        onEditExercise={this.onEditExercise}
                         onClose={this.onCloseAddExercise}
                         tenRm={editing.tenRm}
                     />
@@ -146,6 +156,7 @@ class ExerciseList extends PureComponent {
 ExerciseList.propTypes = {
     addExercise: func.isRequired,
     day: number.isRequired,
+    editExercise: func.isRequired,
     exercises: arrayOf(shape({
         name: string.isRequired,
         tenRm: number.isRequired,
@@ -155,5 +166,6 @@ ExerciseList.propTypes = {
 
 export default connect(null, {
     addExercise: dispatchers.addExercise,
+    editExercise: dispatchers.editExercise,
     removeExercise: dispatchers.removeExercise,
 })(ExerciseList);
