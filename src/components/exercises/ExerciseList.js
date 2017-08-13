@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import * as dispatchers from '~/dispatchers';
 
 import AddExercise from './AddExercise';
+import ExerciseRow from './ExerciseRow';
 
 class ExerciseList extends PureComponent {
     constructor() {
@@ -97,34 +98,13 @@ class ExerciseList extends PureComponent {
                             */
                         }
                         {exercises.map(exercise => (
-                            <tr
+                            <ExerciseRow
+                                editExercise={this.editExercise}
+                                exercise={exercise}
+                                day={day}
                                 key={exercise.name}
-                            >
-                                <td>
-                                    {exercise.name}
-                                </td>
-                                <td>
-                                    {exercise.tenRm} kg
-                                </td>
-                                <td>
-                                    <button
-                                        className="button button__icon button__icon--clear"
-                                        onClick={() => this.removeExercise(day, exercise.name)}
-                                        type="button"
-                                    >
-                                        Fjern øvelse
-                                    </button>
-                                </td>
-                                <td>
-                                    <button
-                                        className="button button__icon button__icon--edit"
-                                        onClick={() => this.editExercise(exercise)}
-                                        type="button"
-                                    >
-                                        Endre øvelse
-                                    </button>
-                                </td>
-                            </tr>
+                                removeExercise={this.removeExercise}
+                            />
                         ))}
                     </tbody>
                 </table>
