@@ -53,6 +53,7 @@ class Day extends PureComponent {
                 >
                     <h2>
                         Dag {day + 1}, {program[0].reps} reps
+                        {program[0].dropset && ' + dropset'}
                     </h2>
                     <div
                         className={
