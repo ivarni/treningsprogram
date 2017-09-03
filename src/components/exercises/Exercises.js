@@ -101,7 +101,7 @@ class Exercises extends PureComponent {
                     {Array.from(Array(split), (_, i) => i + 1).map(day =>
                         (<ExerciseList
                             day={day}
-                            exercises={exercises[day] || []}
+                            exercises={exercises[`day${day}`] || []}
                             key={day}
                         />),
                     )}

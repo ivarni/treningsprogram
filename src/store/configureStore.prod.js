@@ -2,10 +2,11 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
 import rootReducer from '~/reducers';
-import { loadState, saveState } from './localStorage';
+import observer from './observer';
+import * as localStorage from './localStorage';
 
 const configureStore = () => {
-    const preloadedState = loadState();
+    const preloadedState = localStorage.loadState();
 
     const store = createStore(
         rootReducer,
@@ -13,9 +14,7 @@ const configureStore = () => {
         applyMiddleware(thunk),
     );
 
-    store.subscribe(() => {
-        saveState(store.getState());
-    });
+    observer(store);
 
     return store;
 };

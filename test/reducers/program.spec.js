@@ -12,7 +12,7 @@ describe('program reducer', () => {
             split: 1,
         };
         const exercises = {
-            1: [
+            day1: [
                 { name: 'Knebøy', tenRm: 70 },
                 { name: 'Brystpress', tenRm: 25 },
             ],
@@ -56,10 +56,10 @@ describe('program reducer', () => {
             split: 2,
         };
         const exercises = {
-            1: [
+            day1: [
                 { name: 'Knebøy', tenRm: 70 },
             ],
-            2: [
+            day2: [
                 { name: 'Bicepscurl', tenRm: 12 },
             ],
         };

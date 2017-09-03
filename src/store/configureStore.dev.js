@@ -3,15 +3,19 @@ import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 
 import rootReducer from '~/reducers';
-import { loadState, saveState } from './localStorage';
+import observer from './observer';
+import * as localStorage from './localStorage';
 
 const configureStore = () => {
-    const preloadedState = loadState();
+    const preloadedState = localStorage.loadState();
 
+    /* eslint-disable no-underscore-dangle */
+    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+    /* eslint-enable no-underscore-dangle */
     const store = createStore(
         rootReducer,
         preloadedState,
-        compose(
+        composeEnhancers(
             applyMiddleware(
                 thunk,
                 createLogger(),
@@ -19,9 +23,7 @@ const configureStore = () => {
         ),
     );
 
-    store.subscribe(() => {
-        saveState(store.getState());
-    });
+    observer(store);
 
     if (module.hot) {
         module.hot.accept('../reducers', () => {

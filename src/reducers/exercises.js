@@ -1,14 +1,14 @@
 import * as actions from '~/actions';
 
 export const defaultState = {
-    1: [
+    day1: [
         { name: 'Knebøy', tenRm: 55 },
         { name: 'Bicepscurl', tenRm: 12.5 },
         { name: 'Tricepspress', tenRm: 6 },
         { name: 'Legcurl', tenRm: 40 },
         { name: 'Tåhev', tenRm: 45 },
     ],
-    2: [
+    day2: [
         { name: 'Nedtrekk', tenRm: 41 },
         { name: 'Arnoldpress', tenRm: 12.5 },
         { name: 'Enarms roing', tenRm: 15 },
@@ -19,20 +19,20 @@ export const defaultState = {
 
 const addExercise = (state, { day, name, tenRm }) => ({
     ...state,
-    [day]: [
-        ...state[day].filter(exercise => exercise.name !== name),
+    [`day${day}`]: [
+        ...state[`day${day}`].filter(exercise => exercise.name !== name),
         { name, tenRm },
     ],
 });
 
 const removeExercise = (state, { day, name }) => ({
     ...state,
-    [day]: state[day].filter(exercise => exercise.name !== name),
+    [`day${day}`]: state[`day${day}`].filter(exercise => exercise.name !== name),
 });
 
 const editExercise = (state, { day, name, tenRm }) => ({
     ...state,
-    [day]: state[day].map((exercise) => {
+    [`day${day}`]: state[`day${day}`].map((exercise) => {
         if (exercise.name === name) {
             return { name, tenRm };
         }
@@ -48,6 +48,8 @@ export default (state = defaultState, action) => {
             return removeExercise(state, action);
         case actions.EDIT_EXERCISE:
             return editExercise(state, action);
+        case actions.HYDRATE_STORE:
+            return action.exercises;
         default:
             return state;
     }

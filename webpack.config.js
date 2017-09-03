@@ -18,7 +18,7 @@ const cleanArray = arr => arr.reduce(
 const isProd = (yes, no) => (process.env.NODE_ENV === 'production' ? yes : no);
 
 module.exports = {
-    entry: './src/index.js',
+    entry: ['babel-polyfill', './src/index.js'],
 
     output: {
         filename: '[name]_[hash].js',
@@ -41,6 +41,13 @@ module.exports = {
                     { loader: 'style-loader' },
                     { loader: 'css-loader' },
                     { loader: 'less-loader' },
+                ],
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    { loader: 'style-loader' },
+                    { loader: 'css-loader' },
                 ],
             },
         ],

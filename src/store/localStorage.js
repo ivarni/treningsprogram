@@ -12,7 +12,8 @@ export const loadState = () => {
 
 export const saveState = (state) => {
     try {
-        const serializedState = window.JSON.stringify(state);
+        const { user, ...data } = state;
+        const serializedState = window.JSON.stringify(data);
         window.localStorage.setItem('treningsprogram', serializedState);
     } catch (err) {
         // whocares.jpg
