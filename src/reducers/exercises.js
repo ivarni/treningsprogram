@@ -6,14 +6,14 @@ export const defaultState = {
         { name: 'Bicepscurl', tenRm: 12.5 },
         { name: 'Tricepspress', tenRm: 6 },
         { name: 'Legcurl', tenRm: 40 },
-        { name: 'Tåhev', tenRm: 0 },
+        { name: 'Tåhev', tenRm: 45 },
     ],
     2: [
-        { name: 'Nedtrekk', tenRm: 0 },
-        { name: 'Arnoldpress', tenRm: 0 },
-        { name: 'Enarms roing', tenRm: 0 },
-        { name: 'Tautrekk', tenRm: 0 },
-        { name: 'Skulderrotasjon', tenRm: 0 },
+        { name: 'Nedtrekk', tenRm: 41 },
+        { name: 'Arnoldpress', tenRm: 12.5 },
+        { name: 'Enarms roing', tenRm: 15 },
+        { name: 'Tautrekk', tenRm: 32 },
+        { name: 'Skulderrotasjon', tenRm: 10 },
     ],
 };
 
