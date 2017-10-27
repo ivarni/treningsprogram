@@ -33,6 +33,7 @@ class ExerciseList extends PureComponent {
 
     onCloseAddExercise() {
         this.setState({
+            editing: {},
             showExerciseForm: false,
         });
     }
@@ -120,7 +121,7 @@ class ExerciseList extends PureComponent {
                 {showExerciseForm &&
                     <AddExercise
                         day={day}
-                        isEditing={!!editing}
+                        isEditing={!!editing.name}
                         name={editing.name}
                         onAddExercise={this.onAddExercise}
                         onEditExercise={this.onEditExercise}
