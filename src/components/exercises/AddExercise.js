@@ -1,6 +1,10 @@
 import React, { PureComponent } from 'react';
 import { bool, func, number, string } from 'prop-types';
 
+import { Centered } from '~/components/styled/layout';
+import { Form, InputGroup, Label, TextInput } from '~/components/styled/form';
+import { TextButton } from '~/components/styled/buttons';
+
 class AddExercise extends PureComponent {
     constructor(props) {
         super();
@@ -67,56 +71,46 @@ class AddExercise extends PureComponent {
         } = this.state;
 
         return (
-            <form
-                className="exercises__add"
-                onSubmit={this.onSubmit}
-            >
-                <div className="form__input-wrapper">
-                    <label
-                        className="form__label"
-                        htmlFor="name"
-                    >
-                        Navn på øvelse
-                    </label>
-                    <input
-                        className="form__text-input"
-                        disabled={isEditing}
-                        id="name"
-                        name="name"
-                        onChange={this.onChange}
-                        type="text"
-                        value={name}
-                    />
-                </div>
-                <div className="form__input-wrapper">
-                    <label
-                        className="form__label"
-                        htmlFor="tenRm"
-                    >
-                        10 RM max
-                    </label>
-                    <input
-                        className="form__text-input"
-                        id="tenRm"
-                        name="tenRm"
-                        onChange={this.onChange}
-                        type="tel"
-                        value={tenRm}
-                    />
-                </div>
-                <div className="form__input-wrapper">
-                    <button className="button button__text">
-                        Lagre
-                    </button>
-                    <button
-                        className="button button__text"
-                        onClick={onClose}
-                        type="button"
-                    >
-                        Avbryt
-                    </button>
-                </div>
-            </form>
+            <Centered>
+                <Form onSubmit={this.onSubmit}>
+                    <InputGroup>
+                        <Label htmlFor="name">
+                            Navn på øvelse
+                        </Label>
+                        <TextInput
+                            disabled={isEditing}
+                            id="name"
+                            name="name"
+                            onChange={this.onChange}
+                            type="text"
+                            value={name}
+                        />
+                    </InputGroup>
+                    <InputGroup>
+                        <Label htmlFor="tenRm">
+                            10 RM max
+                        </Label>
+                        <TextInput
+                            id="tenRm"
+                            name="tenRm"
+                            onChange={this.onChange}
+                            type="tel"
+                            value={tenRm}
+                        />
+                    </InputGroup>
+                    <InputGroup>
+                        <TextButton>
+                            Lagre
+                        </TextButton>
+                        <TextButton
+                            onClick={onClose}
+                            type="button"
+                        >
+                            Avbryt
+                        </TextButton>
+                    </InputGroup>
+                </Form>
+            </Centered>
         );
     }
 }

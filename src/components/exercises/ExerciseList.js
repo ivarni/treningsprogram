@@ -4,6 +4,17 @@ import { connect } from 'react-redux';
 
 import * as dispatchers from '~/dispatchers';
 
+import { Centered, Section } from '~/components/styled/layout';
+import { IconButtonAdd } from '~/components/styled/buttons';
+import {
+    Table,
+    TableBody,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from '~/components/styled/table';
+import { SectionTitle } from '~/components/styled/typography';
+
 import AddExercise from './AddExercise';
 import ExerciseRow from './ExerciseRow';
 
@@ -78,58 +89,59 @@ class ExerciseList extends PureComponent {
         } = this.props;
 
         return (
-            <div className="exercises__section">
-                <h3 className="exercises__section-header">
-                    Dag {day}
-                </h3>
-                <table className="exercises__list">
-                    <thead>
-                        <tr>
-                            <th>Øvelse</th>
-                            <th>10 RM</th>
-                            <th />
-                            <th />
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                        /*
-                                TODO: Turn these into a component so we dont
-                                have to recreate callbacks on each render
-                            */
-                        }
-                        {exercises.map(exercise => (
-                            <ExerciseRow
-                                editExercise={this.editExercise}
-                                exercise={exercise}
-                                day={day}
-                                key={exercise.name}
-                                removeExercise={this.removeExercise}
-                            />
-                        ))}
-                    </tbody>
-                </table>
-                {!showExerciseForm &&
-                    <button
-                        className="button button__icon button__icon--add"
-                        type="button"
-                        onClick={this.onShowAddExercise}
-                    >
-                        Legg til øvelse
-                    </button>
-                }
-                {showExerciseForm &&
-                    <AddExercise
-                        day={day}
-                        isEditing={!!editing.name}
-                        name={editing.name}
-                        onAddExercise={this.onAddExercise}
-                        onEditExercise={this.onEditExercise}
-                        onClose={this.onCloseAddExercise}
-                        tenRm={editing.tenRm}
-                    />
-                }
-            </div>
+            <Centered>
+                <Section>
+                    <SectionTitle>
+                        Dag {day}
+                    </SectionTitle>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableHeader>Øvelse</TableHeader>
+                                <TableHeader>10 RM</TableHeader>
+                                <TableHeader />
+                                <TableHeader />
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {
+                            /*
+                                    TODO: Turn these into a component so we dont
+                                    have to recreate callbacks on each render
+                                */
+                            }
+                            {exercises.map(exercise => (
+                                <ExerciseRow
+                                    editExercise={this.editExercise}
+                                    exercise={exercise}
+                                    day={day}
+                                    key={exercise.name}
+                                    removeExercise={this.removeExercise}
+                                />
+                            ))}
+                        </TableBody>
+                    </Table>
+                    {!showExerciseForm &&
+                        <IconButtonAdd
+                            type="button"
+                            onClick={this.onShowAddExercise}
+                        >
+                            Legg til øvelse
+                        </IconButtonAdd>
+                    }
+                    {showExerciseForm &&
+                        <AddExercise
+                            day={day}
+                            isEditing={!!editing.name}
+                            name={editing.name}
+                            onAddExercise={this.onAddExercise}
+                            onEditExercise={this.onEditExercise}
+                            onClose={this.onCloseAddExercise}
+                            tenRm={editing.tenRm}
+                        />
+                    }
+                </Section>
+            </Centered>
         );
     }
 }

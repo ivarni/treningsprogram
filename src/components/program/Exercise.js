@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react';
 import { bool, func, number, shape, string } from 'prop-types';
 import { connect } from 'react-redux';
-import classNames from 'classnames';
+
+import { IconButtonClear } from '~/components/styled/buttons';
+import { ProgramExercise } from '~/components/styled/program';
 
 import * as dispatchers from '~/dispatchers';
 
@@ -35,14 +37,9 @@ class Exercise extends PureComponent {
         } = this.props;
 
         return (
-            <div
+            <ProgramExercise
                 aria-label="merk som utført"
-                className={
-                    classNames(
-                        'program__exercise',
-                        { 'program__exercise--done': exercise.done },
-                    )
-                }
+                done={exercise.done}
                 onClick={this.markAsDone}
                 onKeyPress={this.markAsDone}
                 role="button"
@@ -51,8 +48,9 @@ class Exercise extends PureComponent {
                 <div>{exercise.name}</div>
                 <div>{exercise.kgs}</div>
                 <div>kg</div>
-                <div className="button button__icon button__icon--clear" />
-            </div>
+                {/* TODO: this should not be button, only an icon */}
+                <IconButtonClear />
+            </ProgramExercise>
         );
     }
 }

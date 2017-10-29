@@ -6,7 +6,7 @@ const defaultState = [];
 // TODO fix this bloody mess when sober
 const calculateProgram = (state, { config: { split }, exercises }) => formula
     .map(f =>
-        Array.from(Array(split), (_, i) => exercises[`day${i + 1}`])
+        Array.from(Array(split), (_, i) => exercises[i + 1])
             .map(day => day.map(exercise => ({
                 ...exercise,
                 kgs: Number((exercise.tenRm * f.multiplier).toFixed(1)),

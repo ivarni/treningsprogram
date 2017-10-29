@@ -1,21 +1,31 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
+import { BodyText, Link } from '~/components/styled/typography';
+import { NavList } from '~/components/styled/lists';
 
 export default function Navigation() {
     return (
-        <nav className="navigation">
-            <ul className="navigation__bar">
-                <li>
-                    <Link className="navigation__link" to="/øvelser">
-                        Øvelser
-                    </Link>
-                </li>
-                <li>
-                    <Link className="navigation__link" to="/program">
-                        Program
-                    </Link>
-                </li>
-            </ul>
+        <nav>
+            <BodyText>
+                <NavList inline={true}>
+                    <li>
+                        <Link
+                            to="/øvelser"
+                            underline={true}
+                        >
+                            Øvelser
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            to="/program"
+                            underline={true}
+                        >
+                            Program
+                        </Link>
+                    </li>
+                </NavList>
+            </BodyText>
         </nav>
     );
 }

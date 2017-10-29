@@ -19,20 +19,20 @@ export const defaultState = {
 
 const addExercise = (state, { day, name, tenRm }) => ({
     ...state,
-    [`day${day}`]: [
-        ...state[`day${day}`].filter(exercise => exercise.name !== name),
+    [day]: [
+        ...state[day].filter(exercise => exercise.name !== name),
         { name, tenRm },
     ],
 });
 
 const removeExercise = (state, { day, name }) => ({
     ...state,
-    [`day${day}`]: state[`day${day}`].filter(exercise => exercise.name !== name),
+    [day]: state[day].filter(exercise => exercise.name !== name),
 });
 
 const editExercise = (state, { day, name, tenRm }) => ({
     ...state,
-    [`day${day}`]: state[`day${day}`].map((exercise) => {
+    [day]: state[day].map((exercise) => {
         if (exercise.name === name) {
             return { name, tenRm };
         }

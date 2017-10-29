@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react';
 import { func, number, shape, string } from 'prop-types';
 
+import { IconButtonClear, IconButtonEdit } from '~/components/styled/buttons';
+import { TableRow, TableCell } from '~/components/styled/table';
+
 class ExerciseRow extends PureComponent {
     constructor() {
         super();
@@ -34,34 +37,30 @@ class ExerciseRow extends PureComponent {
         } = this.props;
 
         return (
-            <tr
-                key={exercise.name}
-            >
-                <td>
+            <TableRow key={exercise.name}>
+                <TableCell>
                     {exercise.name}
-                </td>
-                <td>
+                </TableCell>
+                <TableCell>
                     {exercise.tenRm} kg
-                </td>
-                <td>
-                    <button
-                        className="button button__icon button__icon--clear"
+                </TableCell>
+                <TableCell>
+                    <IconButtonClear
                         onClick={this.removeExercise}
                         type="button"
                     >
                         Fjern øvelse
-                    </button>
-                </td>
-                <td>
-                    <button
-                        className="button button__icon button__icon--edit"
+                    </IconButtonClear>
+                </TableCell>
+                <TableCell>
+                    <IconButtonEdit
                         onClick={this.editExercise}
                         type="button"
                     >
                         Endre øvelse
-                    </button>
-                </td>
-            </tr>
+                    </IconButtonEdit>
+                </TableCell>
+            </TableRow>
         );
     }
 }

@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
 import { arrayOf, number, shape, string } from 'prop-types';
 import { Collapse } from 'react-collapse';
-import classNames from 'classnames';
 
+import { IconButtonExpand } from '~/components/styled/buttons';
+import { ProgramExercises, ProgramItem, ProgramTitle } from '~/components/styled/program';
 import Exercise from './Exercise';
 
 class Day extends PureComponent {
@@ -36,16 +37,8 @@ class Day extends PureComponent {
         const isDone = program.every(exercise => exercise.done);
 
         return (
-            <li
-                className={
-                    classNames(
-                        'program__day',
-                        { 'program__day--done': isDone },
-                    )
-                }
-            >
-                <div
-                    className="program__title"
+            <ProgramItem done={isDone}>
+                <ProgramTitle
                     onClick={this.toggleOpen}
                     onKeyPress={this.toggleOpen}
                     role="button"
@@ -55,19 +48,11 @@ class Day extends PureComponent {
                         Dag {day + 1}, {program[0].reps} reps
                         {program[0].dropset && ' + dropset'}
                     </h2>
-                    <div
-                        className={
-                            classNames(
-                                'button',
-                                'button__icon',
-                                'button__icon--expand',
-                                { 'button__icon--expand--open': isOpened },
-                            )
-                        }
-                    />
-                </div>
+                    {/* TODO: this should not be button, only an icon */}
+                    <IconButtonExpand expanded={isOpened} />
+                </ProgramTitle>
                 <Collapse isOpened={isOpened}>
-                    <ul className="program__exercises">
+                    <ProgramExercises>
                         {program.map(exercise =>
                             (<li
                                 key={exercise.name}
@@ -79,9 +64,9 @@ class Day extends PureComponent {
                                 />
                             </li>),
                         )}
-                    </ul>
+                    </ProgramExercises>
                 </Collapse>
-            </li>
+            </ProgramItem>
         );
     }
 }

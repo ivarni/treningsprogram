@@ -2,10 +2,12 @@ import React from 'react';
 import { arrayOf, shape } from 'prop-types';
 import { connect } from 'react-redux';
 
+import { Program } from '~/components/styled/program';
+
 import Day from './Day';
 
-const Program = ({ program }) => (
-    <ol className="program">
+const ProgramContainer = ({ program }) => (
+    <Program>
         {program.map((day, index) =>
             (<Day
                 day={index}
@@ -13,10 +15,10 @@ const Program = ({ program }) => (
                 program={day}
             />),
         )}
-    </ol>
+    </Program>
 );
 
-Program.propTypes = {
+ProgramContainer.propTypes = {
     program: arrayOf(arrayOf(shape({}))).isRequired,
 };
 
@@ -27,4 +29,4 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps,
     {},
-)(Program);
+)(ProgramContainer);

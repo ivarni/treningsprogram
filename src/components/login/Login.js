@@ -1,9 +1,12 @@
 import React, { PureComponent } from 'react';
 import { bool, func, shape, string } from 'prop-types';
 import { connect } from 'react-redux';
-import classNames from 'classnames';
 import * as firebase from 'firebase';
 import * as firebaseui from 'firebaseui';
+
+import { IconButtonClear, IconButtonPerson } from '~/components/styled/buttons';
+import { LoginModal } from '~/components/styled';
+import { SmallText } from '~/components/styled/typography';
 
 import * as dispatchers from '~/dispatchers';
 
@@ -75,45 +78,35 @@ class Login extends PureComponent {
         } = this.state;
 
         return (
-            <div className="login">
-                <button
-                    className="login__icon button button__icon button__icon--login"
+            <div>
+                <IconButtonPerson
                     onClick={this.toggleLogin}
                     type="button"
                 >
                     Logg inn
-                </button>
+                </IconButtonPerson>
                 {authenticated &&
-                    <div>
-                        <div className="login__user small-text">
-                            <span className="login__username">
-                                {name}
-                            </span>
-                            <button
-                                className="login__logout button button__icon button__icon--clear"
-                                onClick={this.logout}
-                                type="button"
-                            >
-                                Logg ut
-                            </button>
-                        </div>
-                    </div>
+                    <SmallText middle={true}>
+                        <span>
+                            {name}
+                        </span>
+                        <IconButtonClear
+                            onClick={this.logout}
+                            type="button"
+                        >
+                            Logg ut
+                        </IconButtonClear>
+                    </SmallText>
                 }
-                <div
-                    className={classNames(
-                        'login__modal',
-                        { 'login__modal--open': showLogin },
-                    )}
-                >
-                    <button
-                        className="button button__icon button__icon--clear"
+                <LoginModal open={showLogin}>
+                    <IconButtonClear
                         onClick={this.toggleLogin}
                         type="button"
                     >
                         Lukk innloggingsvindu
-                    </button>
+                    </IconButtonClear>
                     <div id="firebaseui-auth-container" />
-                </div>
+                </LoginModal>
             </div>
         );
     }
