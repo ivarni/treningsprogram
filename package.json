@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "clean": "rimraf dist/",
     "start": "webpack-dev-server --port 3000 --history-api-fallback --hot --config ./webpack.config.js",
-    "build": "cross-env NODE_ENV=production webpack -p --config ./webpack.config.js",
+    "build": "npm run clean && cross-env NODE_ENV=production webpack -p --config ./webpack.config.js",
     "lint": "eslint src/ test/",
     "lint:fix": "eslint --fix src/ test/",
     "precommit": "npm run lint && npm run test",
@@ -13,7 +14,7 @@
     "test": "cross-env NODE_ENV=test node_modules/.bin/nyc node_modules/.bin/mocha -G --compilers js:babel-core/register --require test/setup.js --recursive test",
     "test:watch": "cross-env NODE_ENV=test node_modules/.bin/nyc node_modules/.bin/mocha -G --watch --compilers js:babel-core/register --require test/setup.js --recursive test",
     "posttest": "nyc report --reporter=html",
-    "server": "cross-env NODE_ENV=production npm run build && node server/index.js"
+    "server": "cross-env NODE_ENV=production npm run build && nodemon server/index.js"
   },
   "repository": {
     "type": "git",
@@ -35,8 +36,10 @@
     "expect.js": "^0.3.1",
     "husky": "^0.14.3",
     "mocha": "^4.0.1",
+    "nodemon": "^1.12.5",
     "nyc": "^11.3.0",
     "redux-logger": "^3.0.6",
+    "rimraf": "^2.6.2",
     "webpack-dashboard": "^1.0.2",
     "webpack-dev-server": "^2.9.7"
   },

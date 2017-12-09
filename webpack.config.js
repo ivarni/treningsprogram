@@ -55,6 +55,7 @@ module.exports = {
 
     plugins: cleanArray([
         new HtmlWebpackPlugin({
+            filename: 'index-template.html',
             inject: true,
             template: './src/index.html',
         }),
