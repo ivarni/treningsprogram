@@ -70,6 +70,10 @@ module.exports = {
             path: './dll',
             entry: {
                 vendor: [
+                    'firebase',
+                    'firebaseui',
+                    'lodash.isequal',
+                    'offline-plugin',
                     'prop-types',
                     'react',
                     'react-collapse',
