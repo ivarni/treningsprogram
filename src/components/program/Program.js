@@ -13,8 +13,7 @@ const ProgramContainer = ({ program }) => (
                 day={index}
                 key={index}
                 program={day}
-            />),
-        )}
+            />))}
     </Program>
 );
 

@@ -34,8 +34,7 @@ const markExerciseDone = (state, { day: number, name }) => state
                 };
             }
             return exercise;
-        }),
-    );
+        }));
 
 export default (state = defaultState, action) => {
     switch (action.type) {

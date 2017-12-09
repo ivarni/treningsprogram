@@ -21,10 +21,11 @@ const RadioText = styled.span`
 `;
 
 /* eslint-disable react/prop-types */
-export default props =>
-    (<RadioLabel {...props}>
+export default props => (
+    <RadioLabel {...props}>
         <RadioText>
             {props.children}
         </RadioText>
-    </RadioLabel>);
+    </RadioLabel>
+);
 /* eslint-enable react/prop-types */

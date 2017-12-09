@@ -53,8 +53,8 @@ class Day extends PureComponent {
                 </ProgramTitle>
                 <Collapse isOpened={isOpened}>
                     <ProgramExercises>
-                        {program.map(exercise =>
-                            (<li
+                        {program.map(exercise => (
+                            <li
                                 key={exercise.name}
                             >
                                 <Exercise
@@ -62,8 +62,8 @@ class Day extends PureComponent {
                                     day={day + 1}
                                     isOpened={isOpened}
                                 />
-                            </li>),
-                        )}
+                            </li>
+                        ))}
                     </ProgramExercises>
                 </Collapse>
             </ProgramItem>

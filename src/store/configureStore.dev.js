@@ -15,12 +15,10 @@ const configureStore = () => {
     const store = createStore(
         rootReducer,
         preloadedState,
-        composeEnhancers(
-            applyMiddleware(
-                thunk,
-                createLogger(),
-            ),
-        ),
+        composeEnhancers(applyMiddleware(
+            thunk,
+            createLogger(),
+        )),
     );
 
     observer(store);

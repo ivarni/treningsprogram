@@ -86,8 +86,7 @@ class Exercises extends PureComponent {
                             day={day}
                             exercises={exercises[day] || []}
                             key={day}
-                        />),
-                    )}
+                        />))}
                 </div>
             </Centered>
         );
