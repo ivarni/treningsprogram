@@ -1,5 +1,5 @@
 import * as actions from '~/actions';
-import { loadState } from '~/store/cloudStorage';
+//import { loadState } from '~/store/cloudStorage';
 
 export const loggedIn = user =>
     async (dispatch) => {

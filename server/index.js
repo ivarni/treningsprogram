@@ -1,8 +1,15 @@
+import React from 'react';
+
 const path = require('path');
 const express = require('express');
 const fallback = require('express-history-api-fallback');
 
 const template = require(path.join(__dirname, '..', 'src', 'index-template.js'));
+const configureStore = require('../src/store/configureStore').default;
+import App from '../src/containers/App';
+
+import ReactDOMServer from 'react-dom/server'
+import { StaticRouter } from 'react-router'
 
 const app = express();
 
@@ -27,8 +34,21 @@ export default (...args) => (req, res, next) => {
 
 //app.use(fallback('index.html', { root }));
 app.use((req, res, next) => {
+    console.log(req.url);
     if ((req.method === 'GET' || req.method === 'HEAD') && req.accepts('html')) {
-        res.send(template('<p>ohai</p>'));
+        const context = {};
+        const html = ReactDOMServer.renderToString(
+            <StaticRouter location={req.url} context={context}>
+                <App store={configureStore()} />
+            </StaticRouter>
+        )
+        console.log(html)
+        console.log(context)
+
+        res.write(template(html));
+        res.end();
+
+        //res.send(template('<p>ohai</p>'));
     } else {
         next();
     }

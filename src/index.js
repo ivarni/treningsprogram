@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 
 import * as OfflinePluginRuntime from 'offline-plugin/runtime';
-import * as firebase from 'firebase';
+//import * as firebase from 'firebase';
 
 import Root from '~/containers/Root';
 import configureStore from '~/store/configureStore';
@@ -10,7 +10,7 @@ import configureStore from '~/store/configureStore';
 if (process.env.NODE_ENV === 'production') {
     OfflinePluginRuntime.install();
 }
-
+/*
 const firebaseConfig = {
     apiKey: 'AIzaSyCDuhiNhyZCV_7wVDwFxRX0SUwdQ-E6Wi4',
     authDomain: 'treningsprogram-107d2.firebaseapp.com',
@@ -20,7 +20,7 @@ const firebaseConfig = {
     messagingSenderId: '1004204129924',
 };
 firebase.initializeApp(firebaseConfig);
-
+*/
 const store = configureStore();
 
 const renderApp = Component => render(

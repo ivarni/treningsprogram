@@ -1,7 +1,7 @@
 import isEqual from 'lodash.isequal';
 
-import * as cloudStorage from './cloudStorage';
-import * as localStorage from './localStorage';
+//import * as cloudStorage from './cloudStorage';
+//import * as localStorage from './localStorage';
 
 const stateChanged = (next, previous) =>
     !isEqual(next.config, previous.config) ||
@@ -15,9 +15,9 @@ export default (store) => {
         const nextState = store.getState();
         if (nextState !== currentState) {
             if (stateChanged(nextState, currentState)) {
-                localStorage.saveState(nextState);
+                //localStorage.saveState(nextState);
                 if (nextState.user.authenticated) {
-                    cloudStorage.saveState(nextState);
+                    //cloudStorage.saveState(nextState);
                 }
             }
             currentState = nextState;

@@ -55,7 +55,7 @@ module.exports = {
 
     plugins: cleanArray([
         new HtmlWebpackPlugin({
-            filename: 'index-template.html',
+            filename: isProd('index-template.html', 'index.html'),
             inject: true,
             template: './src/index.html',
         }),
@@ -71,8 +71,8 @@ module.exports = {
             path: './dll',
             entry: {
                 vendor: [
-                    'firebase',
-                    'firebaseui',
+//                    'firebase',
+//                    'firebaseui',
                     'lodash.isequal',
                     'offline-plugin',
                     'prop-types',

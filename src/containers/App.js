@@ -1,18 +1,19 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
+import { Provider } from 'react-redux';
 
 import { About } from '~/components/about';
 import { Exercises } from '~/components/exercises';
-import { Login } from '~/components/login';
+//import { Login } from '~/components/login';
 import { Navigation } from '~/components/navigation';
 import { Program } from '~/components/program';
 
 import { Header, Main } from '~/components/styled';
 import { BodyText, Link, Title } from '~/components/styled/typography';
 
-import '~/styles/index.less';
-import 'firebaseui/dist/firebaseui.css';
+//import '~/styles/index.less';
+//import 'firebaseui/dist/firebaseui.css';
 
 const theme = {
     colour: '#34515E',
@@ -20,12 +21,12 @@ const theme = {
     linkColour: '#292929',
 };
 
-const App = () => (
+const App = ({ store }) => (
     <ThemeProvider theme={theme}>
-        <BrowserRouter>
+        <Provider store={store}>
             <div>
                 <Header>
-                    <Login />
+                    {/* <Login /> */}
                     <Link to="/">
                         <Title>
                             Mitt treningsprogram
@@ -41,7 +42,7 @@ const App = () => (
                     </Main>
                 </BodyText>
             </div>
-        </BrowserRouter>
+        </Provider>
     </ThemeProvider>
 );
 

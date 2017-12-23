@@ -1,13 +1,13 @@
 import React from 'react';
 import { object } from 'prop-types';
-import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
 
 const Root = ({ store }) => (
-    <Provider store={store}>
-        <App />
-    </Provider>
+    <BrowserRouter>
+        <App store={store} />
+    </BrowserRouter>
 );
 
 Root.propTypes = {

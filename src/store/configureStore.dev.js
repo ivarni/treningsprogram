@@ -4,17 +4,20 @@ import { createLogger } from 'redux-logger';
 
 import rootReducer from '~/reducers';
 import observer from './observer';
-import * as localStorage from './localStorage';
+//import * as localStorage from './localStorage';
 
 const configureStore = () => {
-    const preloadedState = localStorage.loadState();
+    //const preloadedState = localStorage.loadState();
 
     /* eslint-disable no-underscore-dangle */
-    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+    let composeEnhancers = compose;
+    //if (window && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) {
+    //    composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
+    //}
     /* eslint-enable no-underscore-dangle */
     const store = createStore(
         rootReducer,
-        preloadedState,
+        /*preloadedState,*/
         composeEnhancers(applyMiddleware(
             thunk,
             createLogger(),

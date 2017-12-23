@@ -5,6 +5,8 @@ const index = fs.readFileSync(path.join(__dirname, '..', 'dist', 'index-template
 
 console.log(index.toString());
 
+module.exports = body => index.toString().replace('###body###', body);
+/*
 module.exports = body => `
     <!DOCTYPE html>
     <html lang="no">
@@ -23,3 +25,4 @@ module.exports = body => `
     </body>
     </html>
 `;
+*/
