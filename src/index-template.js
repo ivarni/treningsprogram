@@ -3,9 +3,11 @@ const path = require('path');
 
 const index = fs.readFileSync(path.join(__dirname, '..', 'dist', 'index-template.html'))
 
-console.log(index.toString());
+//console.log(index.toString());
 
-module.exports = body => index.toString().replace('###body###', body);
+module.exports = (body, styles) => index.toString()
+    .replace('###body###', body)
+    .replace('###styles###', styles);
 /*
 module.exports = body => `
     <!DOCTYPE html>

@@ -8,7 +8,7 @@ import Root from '~/containers/Root';
 import configureStore from '~/store/configureStore';
 
 if (process.env.NODE_ENV === 'production') {
-    OfflinePluginRuntime.install();
+//    OfflinePluginRuntime.install();
 }
 /*
 const firebaseConfig = {

@@ -10,6 +10,7 @@ import App from '../src/containers/App';
 
 import ReactDOMServer from 'react-dom/server'
 import { StaticRouter } from 'react-router'
+import { ServerStyleSheet } from 'styled-components'
 
 const app = express();
 
@@ -37,16 +38,36 @@ app.use((req, res, next) => {
     console.log(req.url);
     if ((req.method === 'GET' || req.method === 'HEAD') && req.accepts('html')) {
         const context = {};
-        const html = ReactDOMServer.renderToString(
-            <StaticRouter location={req.url} context={context}>
+        const sheet = new ServerStyleSheet()
+        const html = ReactDOMServer.renderToString(sheet.collectStyles(
+            <StaticRouter
+                location={decodeURIComponent(req.url)}
+                context={context}
+            >
                 <App store={configureStore()} />
             </StaticRouter>
-        )
-        console.log(html)
-        console.log(context)
+        ))
 
-        res.write(template(html));
+        console.log(req.url)
+
+        const styleTags = sheet.getStyleTags() // or sheet.getStyleElement()
+
+        res.write(template(html, styleTags));
         res.end();
+
+        /*
+
+  // context.url will contain the URL to redirect to if a <Redirect> was used
+  if (context.url) {
+    res.writeHead(302, {
+      Location: context.url
+    })
+    res.end()
+  } else {
+    res.write(html)
+    res.end()
+  }
+        */
 
         //res.send(template('<p>ohai</p>'));
     } else {
