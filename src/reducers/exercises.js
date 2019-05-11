@@ -20,7 +20,7 @@ export const defaultState = {
 const addExercise = (state, { day, name, tenRm }) => ({
     ...state,
     [day]: [
-        ...state[day].filter(exercise => exercise.name !== name),
+        ...(state[day] || []).filter(exercise => exercise.name !== name),
         { name, tenRm },
     ],
 });
