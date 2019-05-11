@@ -1,5 +1,3 @@
 import Exercises from './Exercises';
 
-export {
-    Exercises,
-};
+export { Exercises };
