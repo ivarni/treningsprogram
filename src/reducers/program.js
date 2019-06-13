@@ -1,10 +1,10 @@
 import * as actions from '~/actions';
-import formula from '~/utils/formula';
+import formulaFunc from '~/utils/formula';
 
 const defaultState = [];
 
 // TODO fix this bloody mess when sober
-const calculateProgram = (state, { config: { split }, exercises }) => formula
+const calculateProgram = (state, { config: { split }, exercises }) => formulaFunc(split)
     .map(f =>
         Array.from(Array(split), (_, i) => exercises[i + 1])
             .map(day => day.map(exercise => ({

@@ -1,6 +1,6 @@
 import reducer, { defaultState } from '~/reducers/program';
 import * as actions from '~/actions';
-import formula from '~/utils/formula';
+import formulaFunc from '~/utils/formula';
 
 const getState = (action, state = defaultState) => reducer(state, action);
 
@@ -24,7 +24,7 @@ describe('program reducer', () => {
 
         it('creates one day per line in formula', () => {
             expect(state).to.be.an('array');
-            expect(state).to.have.length(formula.length);
+            expect(state).to.have.length(formulaFunc(1).length);
         });
 
         it('adds each exercise to each day', () => {
@@ -42,7 +42,7 @@ describe('program reducer', () => {
         it('calculates kgs, reps and dropset using the formula', () => {
             state.forEach((day, index) => {
                 const squats = day.find(d => d.name === 'Knebøy');
-                const { dropset, multiplier, reps } = formula[index];
+                const { dropset, multiplier, reps } = formulaFunc(1)[index];
 
                 expect(squats.kgs).to.be(Number((squats.tenRm * multiplier).toFixed(1)));
                 expect(squats.reps).to.be(reps);
@@ -70,7 +70,7 @@ describe('program reducer', () => {
 
         it('creates two days per line in formula', () => {
             expect(state).to.be.an('array');
-            expect(state).to.have.length(2 * formula.length);
+            expect(state).to.have.length(2 * formulaFunc(2).length);
         });
 
         it('adds each exercise to each day', () => {
@@ -90,7 +90,7 @@ describe('program reducer', () => {
                 const squats = day.find(d => d.name === 'Knebøy');
                 const curls = day.find(d => d.name === 'Bicepscurl');
 
-                const { dropset, multiplier, reps } = formula[index];
+                const { dropset, multiplier, reps } = formulaFunc(2)[index];
 
                 expect((squats || curls).kgs).to.be(Number(((squats || curls).tenRm * multiplier).toFixed(1)));
                 expect((squats || curls).reps).to.be(reps);
@@ -103,11 +103,11 @@ describe('program reducer', () => {
         });
 
         it('keeps the done mark if there is already a program', () => {
-            const action = actions.markExerciseDone(35, 'Knebøy');
+            const action = actions.markExerciseDone(15, 'Knebøy');
             state = getState(action, state);
             state = getState(actions.calculateProgram(config, exercises), state);
 
-            expect(state[34][0].done).to.be(true);
+            expect(state[14][0].done).to.be(true);
         });
     });
 

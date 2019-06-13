@@ -109,4 +109,11 @@ const formula = [
     },
 ];
 
-export default formula;
+export default (split) => {
+    if (split === 1) {
+        return formula;
+    }
+    return formula
+        .map((day, index) => (index % 3 === 0 ? null : day))
+        .filter(f => f);
+};
